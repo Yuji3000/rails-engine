@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe "Items API" do
-
   it "sends one item" do
-    a = create_list(:item, 3)
-    get "/api/v1/items/#{a.first.id}"
+    create_list(:item, 3)
+    create_list(:merchant, 3)
+    get "/api/v1/items/#{Item.first.id}"
     
     expect(response).to be_successful
     
@@ -22,6 +22,45 @@ describe "Items API" do
     expect(item[:attributes][:unit_price]).to be_a(Float)
     expect(item[:attributes]).to have_key(:merchant_id)
     expect(item[:attributes][:merchant_id]).to be_a(Integer)
-    
   end  
+
+  it 'can create a new item' do
+    create_list(:item, 3)
+    create_list(:merchant, 3)
+    item = {
+      "name": "value1",
+      "description": "value2",
+      "unit_price": 100.99,
+      "merchant_id": Merchant.first.id
+    }
+    headers = {'CONTENT_TYPE' => 'application/json'}
+
+    post "/api/v1/items", headers: headers, params: JSON.generate(item: item)
+
+    expect(response).to be_successful
+
+    expect(Item.all.count).to eq(4)
+  end
+
+  it 'can update an existing item' do
+    id = create(:item).id
+    # create(:item, merchant_id: merchant.id)
+    previous_name = Item.last.name
+  
+    item_params = {
+                "name": "new name"
+                }
+   
+    headers = {'CONTENT_TYPE' => 'application/json'}
+
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+
+    item = Item.find_by(id: id)
+    
+    expect(response).to be_successful
+
+    expect(item.name).to_not eq(previous_name)
+    expect(item.name).to eq("new name")
+  end
 end
+

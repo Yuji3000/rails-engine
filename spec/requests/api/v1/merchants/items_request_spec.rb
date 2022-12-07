@@ -6,7 +6,6 @@ describe "Merchant Items API" do
 
     a = create_list(:item, 3)
     
-
     get "/api/v1/merchants/#{a[0].merchant.id}/items"
 
     expect(response).to be_successful
@@ -14,8 +13,7 @@ describe "Merchant Items API" do
     response_body = JSON.parse(response.body, symbolize_names: true)
     items = response_body[:data]
   
-   
-    expect(items.count).to eq(3)
+    expect(items.count).to eq(1)
 
     items.each do |item|
       expect(item).to have_key(:id)
