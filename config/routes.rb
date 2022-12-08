@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/api/v1/items/find_all', to: 'api/v1/items/search#index'
+ 
   namespace :api do
     namespace :v1 do
       resources :items, only: [:index, :show, :create, :update, :destroy] do 
