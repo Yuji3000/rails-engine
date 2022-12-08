@@ -4,7 +4,7 @@ describe "Merchant from an Item API" do
   it 'finds a merchant from an item id' do
     a = create_list(:item, 3)
 
-    get "/api/v1/items/#{a[0].id}/merchants"
+    get "/api/v1/items/#{a[0].id}/merchant"
     
     expect(response).to be_successful
 
