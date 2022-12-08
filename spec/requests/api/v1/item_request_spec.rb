@@ -74,5 +74,17 @@ describe "Items API" do
     expect(Item.count).to eq(0)
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
+
+  # it "sad path" do
+  #   item = create(:item, name: "water")
+  
+  #   expect(Item.count).to eq(1)
+  
+  #   get "/api/v1/items/34343434343"
+  # require 'pry'; binding.pry
+  #   # expect(response).to be_successful
+  #   expect(Item.count).to eq(1)
+  #   expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+  # end
 end
 

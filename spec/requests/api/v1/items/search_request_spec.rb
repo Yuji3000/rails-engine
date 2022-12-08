@@ -7,7 +7,7 @@ describe 'item search API' do
     create(:item, name: "bug tOy")
   end
 
-  it 'it can find one item' do
+  it 'it can all items related to the keyword' do
 
     get "/api/v1/items/find_all?name=#{Item.first.name}"
     expect(response).to be_successful

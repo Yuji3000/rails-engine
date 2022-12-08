@@ -297,8 +297,8 @@
           1,
           1,
           18,
-          33,
-          33,
+          29,
+          29,
           null,
           null
         ]
@@ -307,7 +307,7 @@
         "lines": [
           1,
           1,
-          45,
+          41,
           null,
           null
         ]
@@ -316,6 +316,7 @@
         "lines": [
           1,
           null,
+          1,
           1,
           1,
           1,
@@ -383,10 +384,11 @@
         "lines": [
           1,
           1,
-          1,
-          4,
-          4,
-          4,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
@@ -397,7 +399,18 @@
           null,
           1,
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
           null,
@@ -412,7 +425,7 @@
           1,
           null,
           1,
-          2,
+          3,
           null,
           null
         ]
@@ -422,16 +435,22 @@
           1,
           null,
           1,
-          1,
-          4,
-          4,
-          null,
           null,
           1,
           2,
           2,
           2,
           2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
           null,
           null
         ]
@@ -443,6 +462,10 @@
           1,
           1,
           1,
+          null,
+          1,
+          2,
+          null,
           null
         ]
       },
@@ -541,6 +564,18 @@
           1,
           1,
           2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null
@@ -690,6 +725,48 @@
           null
         ]
       },
+      "/Users/source/Desktop/turing/3mod/projects/rails-engine/spec/requests/api/v1/merchants/search_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/source/Desktop/turing/3mod/projects/rails-engine/spec/requests/api/v1/merchants_request_spec.rb": {
         "lines": [
           1,
@@ -735,7 +812,13 @@
           null,
           null,
           1,
+          null,
           1,
+          0,
+          null,
+          null,
+          0,
+          null,
           null,
           null,
           1,
@@ -807,6 +890,10 @@
           1,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -831,8 +918,25 @@
           null,
           null
         ]
+      },
+      "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/controllers/api/v1/merchants/search_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1670482697
+    "timestamp": 1670531405
   }
 }

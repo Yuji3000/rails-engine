@@ -8,10 +8,10 @@ describe "Items API" do
     get '/api/v1/items'
 
     expect(response).to be_successful
-    
+    # require 'pry'; binding.pry
     response_body = JSON.parse(response.body, symbolize_names: true)
     items = response_body[:data]
-# require 'pry'; binding.pry
+
     expect(items.count).to eq(3)
    
     items.each do |item|

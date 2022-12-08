@@ -1,10 +1,11 @@
 require 'rails_helper'
 RSpec.describe Item, type: :model do
-  before :each do
-    create(:item, name: "toy")
-    create(:item, name: "Toy")
-    create(:item, name: "bug tOy")
-  end
+  # before :each do
+  #   create(:item, name: "toy")
+  #   create(:item, name: "Toy")
+  #   create(:item, name: "bug tOy")
+  #   create(:item, name: "boya")
+  # end
   
   describe "relationships" do
     it {should belong_to(:merchant)}
@@ -14,8 +15,19 @@ RSpec.describe Item, type: :model do
 
   describe 'find_by_name' do
     it 'can find various items based on the name' do
-      # require 'pry'; binding.pry
+      create(:item, name: "toy")
+      create(:item, name: "Toy")
+      create(:item, name: "bug tOy")
+      create(:item, name: "boya")
       expect(Item.find_by_name("toy").count).to eq(3)
+    end
+
+    it 'cant find items' do
+      create(:item, name: "toy")
+      create(:item, name: "Toy")
+      create(:item, name: "bug tOy")
+      create(:item, name: "boya")
+      expect(Item.find_by_name("stick").count).to eq(0)
     end
   end
 end
