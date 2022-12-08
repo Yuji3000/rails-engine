@@ -5,8 +5,5 @@ class Item < ApplicationRecord
 
   def self.find_by_name(name)
     Item.where("name ILIKE ?", "%#{name.downcase}%")
-    # Item.where("name LIKE ?", "%#{name.downcase}%")
-    # .order(:name)
-    # Item.where("name LIKE ?", "%#{name}%")
   end
 end
