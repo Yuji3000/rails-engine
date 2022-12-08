@@ -296,9 +296,9 @@
           1,
           1,
           1,
-          14,
-          14,
-          14,
+          18,
+          18,
+          18,
           null,
           null
         ]
@@ -307,7 +307,7 @@
         "lines": [
           1,
           1,
-          26,
+          30,
           null,
           null
         ]
@@ -327,7 +327,7 @@
           1,
           1,
           1,
-          null,
+          1,
           null,
           null,
           null,
@@ -517,6 +517,40 @@
           1,
           null,
           null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/source/Desktop/turing/3mod/projects/rails-engine/spec/requests/api/v1/items/merchant_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -672,34 +706,22 @@
           null,
           1,
           1,
+          1,
+          1,
+          1,
+          null,
+          0,
+          null,
           null,
           null,
           1,
           1,
-          2,
+          1,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
+          1,
+          4,
           null,
           null
         ]
@@ -711,6 +733,23 @@
         ]
       },
       "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/serializers/item_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/controllers/api/v1/items/merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
         "lines": [
           1,
           1,
@@ -731,14 +770,6 @@
           null
         ]
       },
-      "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
       "/Users/source/Desktop/turing/3mod/projects/rails-engine/app/controllers/api/v1/merchants/items_controller.rb": {
         "lines": [
           1,
@@ -749,6 +780,6 @@
         ]
       }
     },
-    "timestamp": 1670440980
+    "timestamp": 1670469386
   }
 }
