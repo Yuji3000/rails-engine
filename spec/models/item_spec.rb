@@ -1,12 +1,5 @@
 require 'rails_helper'
 RSpec.describe Item, type: :model do
-  # before :each do
-  #   create(:item, name: "toy")
-  #   create(:item, name: "Toy")
-  #   create(:item, name: "bug tOy")
-  #   create(:item, name: "boya")
-  # end
-  
   describe "relationships" do
     it {should belong_to(:merchant)}
     it {should have_many(:invoice_items)}

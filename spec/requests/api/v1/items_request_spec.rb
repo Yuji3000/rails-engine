@@ -7,7 +7,7 @@ describe "Items API" do
     get '/api/v1/items'
 
     expect(response).to be_successful
-    # require 'pry'; binding.pry
+
     response_body = JSON.parse(response.body, symbolize_names: true)
     items = response_body[:data]
 
@@ -91,18 +91,6 @@ describe "Items API" do
   end
   
   it "can destroy an item" do
-    item = create(:item)
-  
-    expect(Item.count).to eq(1)
-  
-    delete "/api/v1/items/#{item.id}"
-# require 'pry'; binding.pry
-    expect(response).to be_successful
-    expect(Item.count).to eq(0)
-    expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
-  end
-
-  it "will destroy an item/invoice/invoice_item/transaction when it is the only item on the invoice" do
     @merch1 = Merchant.create!(name: "the merchant")
     @cus = Customer.create!(first_name: 'first', last_name: 'last')
     @item1 = Item.create!(name: 'stuff', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
@@ -110,38 +98,54 @@ describe "Items API" do
     @item3 = Item.create!(name: 'stuff3', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
     @invoice1 = Invoice.create!(customer_id: @cus.id, merchant_id: @merch1.id, status: 'idk')
     @invo_item = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
-    # @invo_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 3)
-    # @invo_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 2, unit_price: 3)
+    @invo_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
+    @invo_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
+    @transact = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: '1212', credit_card_expiration_date: '12121', result: 'idk')
+  
+
+  
+    delete "/api/v1/items/#{@item1.id}"
+
+    expect(response).to be_successful
+    expect(Item.count).to eq(2)
+    expect{Item.find(@item1.id)}.to raise_error(ActiveRecord::RecordNotFound)
+  end
+
+  it "will destroy an item/invoice/invoice_item when it is the only item on the invoice" do
+    @merch1 = Merchant.create!(name: "the merchant")
+    @cus = Customer.create!(first_name: 'first', last_name: 'last')
+    @item1 = Item.create!(name: 'stuff', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @item2 = Item.create!(name: 'stuff2', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @item3 = Item.create!(name: 'stuff3', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @invoice1 = Invoice.create!(customer_id: @cus.id, merchant_id: @merch1.id, status: 'idk')
+    @invo_item = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
     @transact = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: '1212', credit_card_expiration_date: '12121', result: 'idk')
    
-    # require 'pry'; binding.pry
     delete "/api/v1/items/#{@item1.id}"
+
     expect(response).to be_successful
     expect(Item.exists?(@item1.id)).to eq(false)
     expect(InvoiceItem.exists?(@invo_item.id)).to eq(false)
-    # expect(Invoice.exists?(@invoice1.id)).to eq(false)
-    # expect(Transaction.exists?(@transact.id)).to eq(false)
-
   end
 
-  # it "will destroy an item and transaction/invoice item, but not an invoice when there are more than one item on the invoice" do
-  #   @merch1 = Merchant.create!(name: "the merchant")
-  #   @cus = Customer.create!(first_name: 'first', last_name: 'last')
-  #   @item1 = Item.create!(name: 'stuff', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
-  #   @item2 = Item.create!(name: 'stuff2', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
-  #   @item3 = Item.create!(name: 'stuff3', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
-  #   @invoice1 = Invoice.create!(customer_id: @cus.id, merchant_id: @merch1.id, status: 'idk')
-  #   @invo_item = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
-  #   @invo_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
-  #   @invo_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
-  #   @transact = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: '1212', credit_card_expiration_date: '12121', result: 'idk')
+  it "will destroy an item and invoice item, but not an invoice when there are more than one item on the invoice" do
+    @merch1 = Merchant.create!(name: "the merchant")
+    @cus = Customer.create!(first_name: 'first', last_name: 'last')
+    @item1 = Item.create!(name: 'stuff', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @item2 = Item.create!(name: 'stuff2', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @item3 = Item.create!(name: 'stuff3', description: 'its stuff!', unit_price: 1, merchant_id: @merch1.id)
+    @invoice1 = Invoice.create!(customer_id: @cus.id, merchant_id: @merch1.id, status: 'idk')
+    @invo_item = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
+    @invo_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
+    @invo_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 3)
+    @transact = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: '1212', credit_card_expiration_date: '12121', result: 'idk')
    
-  #   delete "/api/v1/items/#{@item1.id}"
+    delete "/api/v1/items/#{@item1.id}"
     
-  #   expect(response).to be_successful
-  #   expect(Item.exists?(@item1.id)).to eq(false)
-  #     expect(Item.exists?(@invo_item.id)).to eq(false)
-  #     expect(Item.exists?(@invoice1.id)).to eq(false)
-  #     expect(Item.exists?(@transact.id)).to eq(false)
-  #   end
+    expect(response).to be_successful
+    expect(Item.exists?(@item1.id)).to eq(false)
+    expect(InvoiceItem.exists?(@invo_item.id)).to eq(false)
+    expect(Invoice.exists?(@invoice1.id)).to eq(true)
+    expect(Transaction.exists?(@transact.id)).to eq(true)
+  end
 end

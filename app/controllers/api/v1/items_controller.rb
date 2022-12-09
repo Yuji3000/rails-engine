@@ -7,8 +7,6 @@ class Api::V1::ItemsController < ApplicationController
     begin
       render json: ItemSerializer.new(Item.find(params[:id]))
     rescue ActiveRecord::RecordNotFound => exception
-      # render json: ErrorItem.new("Item does not exist", 'Not Found', 404)
-      # render json: ErrorItemSerializer.new(ErrorItem.new("Item does not exist", 'Not Found', 404))
       render json: { errors: { details: 'Item does not exist '}}, status: 404
     end
   end
@@ -32,19 +30,17 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    # Transaction.where("invoice_id = ?", "#{params[:id]}").destroy
     item = Item.find(params[:id])
-# require 'pry'; binding.pry
-    # if params[:id] != nil
-    #   item.invoices.each do |invoice|
-    #     # require 'pry'; binding.pry
-    #     invoice.transactions.destroy
-    #   end
-      # require 'pry'; binding.pry
-    item.invoices.destroy
-    item.destroy
-    render json: ItemSerializer.new(item)
-  
+    n_item = item.invoices.each do |invoice|
+
+      if invoice.items.count > 1
+        item.destroy
+      else
+        invoice.destroy
+        item.destroy
+      end
+    end
+    render json: ItemSerializer.new(n_item)
   end
 
 private
