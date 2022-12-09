@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 describe 'item search API' do
-  before :each do
+  # before :each do
+  #   create(:item, name: "toy")
+  #   create(:item, name: "Toy")
+  #   create(:item, name: "bug tOy")
+  # end
+
+  it 'it can all items related to the keyword' do
     create(:item, name: "toy")
     create(:item, name: "Toy")
     create(:item, name: "bug tOy")
-  end
-
-  it 'it can all items related to the keyword' do
 
     get "/api/v1/items/find_all?name=#{Item.first.name}"
     expect(response).to be_successful

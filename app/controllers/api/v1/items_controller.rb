@@ -32,8 +32,19 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    deleted_item = Item.destroy(params[:id])
-    render json: ItemSerializer.new(deleted_item)
+    # Transaction.where("invoice_id = ?", "#{params[:id]}").destroy
+    item = Item.find(params[:id])
+# require 'pry'; binding.pry
+    # if params[:id] != nil
+    #   item.invoices.each do |invoice|
+    #     # require 'pry'; binding.pry
+    #     invoice.transactions.destroy
+    #   end
+      # require 'pry'; binding.pry
+    item.invoices.destroy
+    item.destroy
+    render json: ItemSerializer.new(item)
+  
   end
 
 private
